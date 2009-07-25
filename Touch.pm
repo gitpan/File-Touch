@@ -3,7 +3,7 @@ package File::Touch;
 require Exporter;
 @ISA = qw(Exporter);
 @EXPORT = qw(touch);
-$VERSION = "0.06";
+$VERSION = "0.07";
 use warnings;
 use strict;
 
@@ -14,7 +14,7 @@ use Fcntl;
 
 my $SYSOPEN_MODE = O_WRONLY|O_CREAT;
 eval {
-    $SYSOPEN_MODE |= &{ $Fcntl::{'O_NONBLOCK'} };
+    $SYSOPEN_MODE |= O_NONBLOCK;
 };
 if($@) {
     if($@ =~ /Your vendor has not defined/) {
@@ -24,10 +24,6 @@ if($@) {
 	die "$@"; # Rethrow exception, must be something different
     }
 }
-
-
-
-
 
 foreach my $Fcntl_sym (keys %Fcntl::){
     if($Fcntl_sym eq 'O_NONBLOCK'){
