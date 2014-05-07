@@ -1,5 +1,5 @@
 package File::Touch;
-$File::Touch::VERSION = '0.08_01';
+$File::Touch::VERSION = '0.09';
 use 5.006;
 use warnings;
 use strict;
@@ -138,7 +138,7 @@ __END__
 
 =head1 NAME
 
-File::Touch - update access and modification timestamps, creating nonexistent files where necessary.
+File::Touch - update file access and modification times, optionally creating files if needed
 
 =head1 SYNOPSIS
 
@@ -176,6 +176,12 @@ If nonzero, do not create new files. Default is zero.
 =item reference => $reference_file
 
 If defined, use timestamps from this file instead of current time. Default is undefined.
+
+=item time => $time
+
+If defined, then this value will be used for both access time and modification time,
+whichever of those are set. This time is overridden by the C<atime> and C<mtime> arguments,
+if you use them.
 
 =item atime => $time
 
